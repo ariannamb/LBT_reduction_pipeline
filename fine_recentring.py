@@ -9,19 +9,19 @@ from classicalADI import *
 pbar=ProgressBar()
 
 ###set the root folder for the extraction of the header and parallactic angles:
-dir_para='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/raw/SCIENCE/'
+dir_para='/raw/SCIENCE/'
 
 ##set the folder with the frames that need recentring:
-folder_DX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/DX/'
+folder_DX='/reduced/SCIENCE/DX/'
 #set the flder where to save the re-centred files:
-save_folder_DX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/DX_fcentre/'
+save_folder_DX='/reduced/SCIENCE/DX_fcentre/'
 #set a counter that takes care of how many frames fail to re-centre:
 erased_frames=0
 
 ###set the folder with the frames that need recentring:
-folder_SX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/SX/'
+folder_SX='/reduced/SCIENCE/SX/'
 ##set the flder where to save the re-centred files:
-save_folder_SX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/SX_fcentre/'
+save_folder_SX='/reduced/SCIENCE/SX_fcentre/'
 
 
 size_new=400 ##final size for the frames
