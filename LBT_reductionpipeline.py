@@ -29,6 +29,11 @@ start = time.time()
 master_flat=fits.open('master_flat_2.fits')[0].data
 ##Set the bad pixel map to use:
 Bad_Pixel_map=fits.open('bad_pixels_mask_0.25.fits')[0].data
+##set the paths where to save the final DX and SX stamps:
+savepath_DX='/reduced/SCIENCE/DX/'
+savepath_SX='/reduced/SCIENCE/SX/'
+savepath_DX_centre='/reduced/SCIENCE/DX_fcentre/'
+savepath_SX_centre='/SCIENCE/SX_fcentre/'
 ##Set the Verbose option
 target_name='HD143894'
 verbose=True
@@ -45,11 +50,6 @@ sep_lf= 1060 ##separation, in pixel value, between left-right
 diff=1 ##considering that the typical time difference between two similar nods is ~3 minutes, I set a lower threshold for sky variations, 100 seconds sounds reasonable
 ###Set the desired size (in pixels) of the final reduced frames
 size_final=500
-##set the paths where to save the final DX and SX stamps:
-savepath_DX='/reduced/SCIENCE/DX/'
-savepath_SX='/reduced/SCIENCE/SX/'
-savepath_DX_centre='/reduced/SCIENCE/DX_fcentre/'
-savepath_SX_centre='/SCIENCE/SX_fcentre/'
 frame_index='DX_2' ##this tells if the frame_DX uses the cut_indexes with suffix 2 or 1 (i.e: a1,b1,c1,d1,a2,b2,c2,d2 used for padding the images before dewarping them)
 shape_data=[1024,2048] ##size of the window for these observations
 
