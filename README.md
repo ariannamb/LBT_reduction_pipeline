@@ -14,3 +14,6 @@ The pipeline consists of the following steps:
 -De-warping
 -Centring
 -Stacking
+
+
+The data included can be reduced with the pipeline.
