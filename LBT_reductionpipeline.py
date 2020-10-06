@@ -19,22 +19,22 @@ from astropy.convolution import Gaussian2DKernel
 from astropy.convolution import interpolate_replace_nans
 import gc
 import pickle
-sys.path.append('/Users/musso/Documents/Projects/Pyhton_scripts/dewarp_package/')
-from dewarp import dewarp_frames
+##sys.path.append('/dewarp_package/')
+##from import dewarp_frames
 
 import time
 start = time.time()
 
 ##Set the path to the master flat:
-master_flat=fits.open('/Users/musso/Documents/Projects/Pyhton_scripts/flat_mask_2018B/master_flat_2.fits')[0].data
+master_flat=fits.open('master_flat_2.fits')[0].data
 ##Set the bad pixel map to use:
-Bad_Pixel_map=fits.open('/Users/musso/Documents/Projects/Pyhton_scripts/flat_mask_2018B/bad_pixels_mask_0.25.fits')[0].data
+Bad_Pixel_map=fits.open('bad_pixels_mask_0.25.fits')[0].data
 ##Set the Verbose option
 target_name='HD143894'
 verbose=True
 quick_reduction=True #set this to 'true' to get a quick ADI reduction at the end (i.e: classical ADI)
 ###set the path to the science frames and the threshold
-path_to_frames='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/raw/SCIENCE/'
+path_to_frames='/raw/SCIENCE/'
 threshold=3700
 ##Set the expected number of stars per frame (i.e: 1 dish or 2 dish observation), and the expected nod:
 n_stars=2
@@ -46,10 +46,10 @@ diff=1 ##considering that the typical time difference between two similar nods i
 ###Set the desired size (in pixels) of the final reduced frames
 size_final=500
 ##set the paths where to save the final DX and SX stamps:
-savepath_DX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/DX/'
-savepath_SX='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/SX/'
-savepath_DX_centre='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/DX_fcentre/'
-savepath_SX_centre='/Users/musso/Documents/Projects/Pyhton_scripts/HD143894_data/reduced/SCIENCE/SX_fcentre/'
+savepath_DX='/reduced/SCIENCE/DX/'
+savepath_SX='/reduced/SCIENCE/SX/'
+savepath_DX_centre='/reduced/SCIENCE/DX_fcentre/'
+savepath_SX_centre='/SCIENCE/SX_fcentre/'
 frame_index='DX_2' ##this tells if the frame_DX uses the cut_indexes with suffix 2 or 1 (i.e: a1,b1,c1,d1,a2,b2,c2,d2 used for padding the images before dewarping them)
 shape_data=[1024,2048] ##size of the window for these observations
 
@@ -524,10 +524,10 @@ del datacube_nan
 
 ##STEP 7
 ###Now pad and de-warp the data:
-if verbose==True:
-    print ('STEP 6: dewarp the images')
+#if verbose==True:
+#    print ('STEP 6: dewarp the images')
 
-dewarp_frames(savepath_DX,savepath_SX,'2019A',shape_data)
+#dewarp_frames(savepath_DX,savepath_SX,'2019A',shape_data)
 
 
 print ('The data reduction is done: the frames have been sky-subtracted, flat-fielded and median subtracted (i.e: median of each column), with the star ROUGHLY positioned at the center of the frames. IF more than one mirror was used, the frames have been saved in DX and SX folder, separately. ')
