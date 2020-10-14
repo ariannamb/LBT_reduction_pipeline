@@ -19,8 +19,6 @@ from astropy.convolution import Gaussian2DKernel
 from astropy.convolution import interpolate_replace_nans
 import gc
 import pickle
-##sys.path.append('/dewarp_package/')
-##from import dewarp_frames
 
 import time
 start = time.time()
@@ -35,7 +33,7 @@ savepath_SX='/reduced/SCIENCE/SX/'
 savepath_DX_centre='/reduced/SCIENCE/DX_fcentre/'
 savepath_SX_centre='/SCIENCE/SX_fcentre/'
 ##Set the Verbose option
-target_name='HD143894'
+target_name='target'
 verbose=True
 quick_reduction=True #set this to 'true' to get a quick ADI reduction at the end (i.e: classical ADI)
 ###set the path to the science frames and the threshold
@@ -58,6 +56,10 @@ shape_data=[1024,2048] ##size of the window for these observations
 ##########################################################################################################################################################
 ### define the find_stars function here, so that it can be parallelized:
 def find_stars_parell(path,threshold,type,Bad_Pixel_map,unsat=False):
+    '''
+    This function finds the position of the star(s) in a given frame as the maxima above a given set threshold and return them as an x,y position.
+    A bad pixel map is passed as a parameter to ignore bad pixels.
+    '''
     #######
     #import the image as an array
     if type=='fits':
@@ -106,7 +108,10 @@ def find_stars_parell(path,threshold,type,Bad_Pixel_map,unsat=False):
 
 ##this performs a principal component approach based- sky subtraction:
 def pca_subtraction(master_flat,skynod,datanod,up_down,savepath_DX,savepath_SX,n_stars,Bad_Pixel_map,std=2):
-
+    '''
+    Given a datacube of sky frames, this function performs a principal components based approach-based sky subtraction, 
+    and saves the sky-subtracted frames in the specified location.
+    '''
     skycube=[]
     for i in range(len(skynod.keys())):
         skycube.append(skynod[str(sorted(skynod.keys())[i])][2])
@@ -517,18 +522,6 @@ for i in pbar(range(len(datacube_reduced))):
 
 del datacube
 del datacube_nan
-
-
-
-###NOW I CAN DE-WARP AND THEN I CAN ROUGHLY CUT THE FRAMES:
-
-##STEP 7
-###Now pad and de-warp the data:
-#if verbose==True:
-#    print ('STEP 6: dewarp the images')
-
-#dewarp_frames(savepath_DX,savepath_SX,'2019A',shape_data)
-
 
 print ('The data reduction is done: the frames have been sky-subtracted, flat-fielded and median subtracted (i.e: median of each column), with the star ROUGHLY positioned at the center of the frames. IF more than one mirror was used, the frames have been saved in DX and SX folder, separately. ')
 
